@@ -6,7 +6,7 @@
 /*   By: dhaliti <dhaliti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 10:49:49 by dhaliti           #+#    #+#             */
-/*   Updated: 2022/04/27 10:51:38 by dhaliti          ###   ########.fr       */
+/*   Updated: 2022/04/27 11:21:54 by dhaliti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ void ft_init_data(t_data **data)
 	tmp = *data;
 	tmp->A = (t_A *)malloc(sizeof(t_A));
 	tmp->A->light = 0;
-	tmp->A->red = 0;
-	tmp->A->green = 0;
-	tmp->A->blue = 0;
+	tmp->A->r = 0;
+	tmp->A->g = 0;
+	tmp->A->b = 0;
 	tmp->C = (t_C *)malloc(sizeof(t_C));
 	tmp->C->x = 0;
 	tmp->C->y = 0;

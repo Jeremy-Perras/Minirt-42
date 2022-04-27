@@ -6,139 +6,212 @@
 /*   By: dhaliti <dhaliti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 13:50:32 by dhaliti           #+#    #+#             */
-/*   Updated: 2022/04/27 11:07:34 by dhaliti          ###   ########.fr       */
+/*   Updated: 2022/04/27 12:05:22 by dhaliti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
+static void free_strs(char **str, char **str2)
+{
+	int i;
+	int j;
+
+	i = -1;
+	while (str[++i])
+		free (str[i]);
+	free(str);
+	if (str2)
+	{
+		i = -1;
+		while (str2[++i])
+			free (str2[i]);
+		free(str2);
+	}
+}
+
 static int ft_ambient(char **elem, t_parse *parse, t_data *data)
 {
 	double light;
+	char	**colors;
 	int 	r;
 	int		g;
 	int		b;
 
-	light = ft_ato
-
-	path = ft_split(line, ' ');
-	path[1][ft_strlen(path[1]) - 1] = '\0';
-	fd = open(path[1], O_RDONLY);
-	if (fd < 0)
-		exit_error("Error: North texture's path cannot be found");
-	close(fd);
-	i = -1;
-	while (path[++i])
-		free(path[i]);
-	free(path);
-	parse->n = 1;
+	if (!elem[2] || elem[3])
+		exit_error("invalid data for A element");
+	light = ft_atof(elem[1])
+	if (light < 0 || light > 1)
+		exit_error("invalid value for ambient lightining");
+	colors = ft_split(elem[2], ',');
+	if (!colors[2] || colors[3])
+		exit_error("invalid ambient lightning coloration");
+	r = ft_atoi(colors[0]);
+	g = ft_atoi(colors[1]);
+	b = ft_atoi(colors[2]);
+	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+		exit_error("invalid ambient lightning coloration");
+	data->A->light = light;
+	data->A->r = r;
+	data->A->g = g;
+	data->A->b = b;
+	free_strs(colors, NULL);
 	return (1);
 }
 
-static int s_texture(char *line, t_parse *parse)
+static int ft_camera(char **elem, t_parse *parse, t_data *data)
 {
-	int fd;
-	int i;
-	char **path;
+	char	**points;
+	char 	**vector;
 
-	path = ft_split(line, ' ');
-	path[1][ft_strlen(path[1]) - 1] = '\0';
-	fd = open(path[1], O_RDONLY);
-	if (fd < 0)
-		exit_error("Error: South texture's path cannot be found");
-	close(fd);
-	i = -1;
-	while (path[++i])
-		free(path[i]);
-	parse->s = 1;
-	free(path);
+	if (!elem[3] || elem[4])
+		exit_error("invalid data for C element");
+	points = ft_split(elem[1] ',');
+	if (!points[2] || points[3])
+		exit_error("Invalid camera coordinates");
+	data->C->x = ft_atof(points[0]);
+	data->C->y = ft_atof(points[1]);
+	data->C->z = ft_atof(points[2]);
+	vector = ft_split(elem[2], ',');
+	if (!vector[2] || vector[3])
+		exit_error("Invalid camera orientation");
+	data->C->x = ft_atof(vector[0]);
+	data->C->y = ft_atof(vector[1]);
+	data->C->z = ft_atof(vector[2]);
+	if (data->C->x < 0.0 || data->C->x > 1.0 || data->C->y < 0.0
+		|| data->C->y > 1.0 || data->C->z < 0.0 || data->C->z > 1.0)
+		exit_error("Invalid camera orientation");
+	data->C->fov = ft_atof(elem[3])
+	if (data->C->fov < 0.0 || data->C->fov > 180.0)
+		exit_error("Invalid camera field of view");
+	free_strs(points, vector);
 	return (1);
 }
 
-static int w_texture(char *line, t_parse *parse)
+static int ft_light(char **elem, t_parse *parse, t_data *data)
 {
-	int fd;
-	int i;
-	char **path;
+	char **points;
+	char **colors;
 
-	path = ft_split(line, ' ');
-	path[1][ft_strlen(path[1]) - 1] = '\0';
-	fd = open(path[1], O_RDONLY);
-	if (fd < 0)
-		exit_error("Error: West texture's path cannot be found");
-	close(fd);
-	i = -1;
-	while (path[++i])
-		free(path[i]);
-	parse->w = 1;
-	free(path);
+	if (!elem[3] || elem[4])
+		exit_error("L element: invalid data");
+	points = ft_split(elem[1], ',');
+	if (!points[2] || points[3])
+		exit_error("L element: invalid coordinates");
+	data->L->x = ft_atof(points[0]);
+	data->L->y = ft_atof(points[1]);
+	data->L->z = ft_atof(points[2]);
+	data->L->light = ft_atof(elem[2]);
+	if (data->L->light < 0.0 || data->L->light > 1.0)
+		exit_error("invalid light brightness");
+	colors = ft_split(elem[3] ',');
+	if (!colors[2] || colors[3])
+		exit_error("L element: invalid colors");
+	data->L->r = ft_atof(colors[0]);
+	data->L->g = ft_atof(colors[1]);
+	data->L->b = ft_atof(colors[2]);
+	if (!data->L->r || data->L->r > 255 || !data->L->g || data->L->g > 255
+		|| !data->L->b || data->L->b > 255)
+		exit_error("L element: invalid color values");
+	free_strs(points, colors);
 	return (1);
 }
 
-static int e_texture(char *line, t_parse *parse)
+static int ft_sphere(char **elem, t_parse *parse, t_data *data)
 {
-	int fd;
-	int i;
-	char **path;
+	char **points;
+	char **colors;
 
-	path = ft_split(line, ' ');
-	path[1][ft_strlen(path[1]) - 1] = '\0';
-	fd = open(path[1], O_RDONLY);
-	if (fd < 0)
-		exit_error("Error: East texture's path cannot be found");
-	close(fd);
-	i = -1;
-	while (path[++i])
-		free(path[i]);
-	parse->e = 1;
-	free(path);
+	if (!elem[3] || elem[4])
+		exit_error("Sphere element: invalid data");
+	points = ft_split(elem[1], ',');
+	if (!points[2] || points[3])
+		exit_error("Sphere element: invalid coordinates");
+	data->sp->x = ft_atof(points[0]);
+	data->sp->y = ft_atof(points[1]);
+	data->sp->z = ft_atof(points[2]);
+	data->sp->diam = ft_atof(elem[2]);
+	colors = ft_split(elem[3] ',');
+	if (!colors[2] || colors[3])
+		exit_error("Sphere element: invalid colors");
+	data-sp->r = ft_atof(colors[0]);
+	data->sp->g = ft_atof(colors[1]);
+	data->sp->b = ft_atof(colors[2]);
+	if (!data->sp->r || data->sp->r > 255 || !data->sp->g || data->sp->g > 255
+		|| !data->sp->b || data->sp->b > 255)
+		exit_error("Sphere element: invalid color values");
+	free_strs(points, colors);
 	return (1);
 }
 
-static int fc_texture(char *line)
+static int ft_plan(char **elem, t_parse *parse, t_data *data)
 {
-	int i;
-	char **cmd;
-	char **rgb;
+	char **points;
+	char **vector;
+	char **colors;
 
-	cmd = ft_split(line, ' ');
-	if (!cmd[1])
-		exit_error("Error: Ceiling and floor color values missing");
-	rgb = ft_split(cmd[1], ',');
-	if (!rgb[1] || !rgb[2])
-		exit_error("Error: Ceiling and floor color values missing");
-	i = -1;
-	while (rgb[++i])
-	{
-		if (ft_atoi(rgb[i]) > 255 || ft_atoi(rgb[i]) < 0)
-			exit_error("Ceiling or floor invalid color values");
-		free(rgb[i]);
-		if (cmd[i])
-			free(cmd[i]);
-	}
-	free(rgb);
-	free(cmd);
+	if (!elem[3] || elem[4])
+		exit_error("Plan element: invalid data");
+	points = ft_split(elem[1], ',');
+	if (!points[2] || points[3])
+		exit_error("Plan element: invalid coordinates");
+	data->pl->x = ft_atof(points[0]);
+	data->pl->y = ft_atof(points[1]);
+	data->pl->z = ft_atof(points[2]);
+	vector = ft_split(elem[2], ',');
+	if (!vector[2] || vector[3])
+		exit_error("Plan element: invalid vector orientation");
+	data->pl->vector_x = ft_atof(vector[0]);
+	data->pl->vector_y = ft_atof(vector[1]);
+	data->pl->vector_z = ft_atof(vector[2]);
+	if (!data->pl->vector_x || data->pl->vector_x > 1.0 || !data->pl->vector_y
+	|| data->pl->vector_y > 1.0 || !data->pl->vector_z || data->pl->vector_z > 1.0)
+		exit_error("Plan element: invalid vector orientation");
+	colors = ft_split(elem[3] ',');
+	if (!colors[2] || colors[3])
+		exit_error("Plan element: invalid colors");
+	data-pl->r = ft_atof(colors[0]);
+	data->pl->g = ft_atof(colors[1]);
+	data->pl->b = ft_atof(colors[2]);
+	if (!data->pl->r || data->pl->r > 255 || !data->pl->g || data->pl->g > 255
+		|| !data->pl->b || data->pl->b > 255)
+		exit_error("Plan element: invalid color values");
+	free_strs(points, colors);
 	return (1);
 }
 
-void ft_texture(char *line, t_parse *parse)
+static int ft_cylinder(char **elem, t_parse *parse, t_data *data)
 {
-	if (ft_strncmp(line, "NO", 2) == 0)
-		parse->flag += n_texture(line, parse);
-	if (ft_strncmp(line, "SO", 2) == 0)
-		parse->flag += s_texture(line, parse);
-	if (ft_strncmp(line, "WE", 2) == 0)
-		parse->flag += w_texture(line, parse);
-	if (ft_strncmp(line, "EA", 2) == 0)
-		parse->flag += e_texture(line, parse);
-	if (ft_strncmp(line, "F", 1) == 0)
-	{
-		parse->flag += fc_texture(line);
-		parse->f++;
-	}
-	if (ft_strncmp(line, "C", 1) == 0)
-	{
-		parse->flag += fc_texture(line);
-		parse->c++;
-	}
+	char **points;
+	char **vector;
+	char **colors;
+
+	if (!elem[3] || elem[4])
+		exit_error("Plan element: invalid data");
+	points = ft_split(elem[1], ',');
+	if (!points[2] || points[3])
+		exit_error("Plan element: invalid coordinates");
+	data->pl->x = ft_atof(points[0]);
+	data->pl->y = ft_atof(points[1]);
+	data->pl->z = ft_atof(points[2]);
+	vector = ft_split(elem[2], ',');
+	if (!vector[2] || vector[3])
+		exit_error("Plan element: invalid vector orientation");
+	data->pl->vector_x = ft_atof(vector[0]);
+	data->pl->vector_y = ft_atof(vector[1]);
+	data->pl->vector_z = ft_atof(vector[2]);
+	if (!data->pl->vector_x || data->pl->vector_x > 1.0 || !data->pl->vector_y
+	|| data->pl->vector_y > 1.0 || !data->pl->vector_z || data->pl->vector_z > 1.0)
+		exit_error("Plan element: invalid vector orientation");
+	colors = ft_split(elem[3] ',');
+	if (!colors[2] || colors[3])
+		exit_error("Plan element: invalid colors");
+	data-pl->r = ft_atof(colors[0]);
+	data->pl->g = ft_atof(colors[1]);
+	data->pl->b = ft_atof(colors[2]);
+	if (!data->pl->r || data->pl->r > 255 || !data->pl->g || data->pl->g > 255
+		|| !data->pl->b || data->pl->b > 255)
+		exit_error("Plan element: invalid color values");
+	free_strs(points, colors);
+	return (1);
 }
