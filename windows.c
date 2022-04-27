@@ -6,7 +6,7 @@
 /*   By: jperras <jperras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 13:36:16 by jperras           #+#    #+#             */
-/*   Updated: 2022/04/27 16:04:00 by jperras          ###   ########.fr       */
+/*   Updated: 2022/04/27 17:07:57 by jperras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void ft_put_pixel(t_data *data)
 	double inte;
 	t_vector vector;
 	int m;
-	int n;
-	char c[2];
+	//int n;
+	//char c[2];
 	int color;
 
 	lumiere.origin.x = 15 ;
@@ -62,7 +62,7 @@ void ft_put_pixel(t_data *data)
 	{
 		while(j < Width)
 		{
-			color = create_trgb(0,255,0,0);
+			color = create_trgb(0,0,0,0);
 			ray.dir.x = j - Width / 2;
 			ray.dir.y = i - Height / 2;
 			ray.dir.z = -(Width / 2) / tan(FOV/2);
@@ -81,17 +81,18 @@ void ft_put_pixel(t_data *data)
 				if(inte < 0)
 					inte = 0;
 				m = 0;
-				c[0] = '0';
-				c[1] = '0';
-				n = 0;
-				ft_puthexa(inte, &m, c);
-				n += ft_atoi(&c[0]);
-				n += ft_atoi(&c[1]);
-				color = create_trgb(n, 255, 255, 255);
-				printf("%f ",inte);
+				//c[0] = '0';
+				//c[1] = '0';
+				//n = 0;
+				//ft_puthexa(inte, &m, c);
+				//n += ft_atoi(&c[0]);
+				//n += ft_atoi(&c[1]);
+				if(inte != 0)
+					color = create_trgb(inte, 0, 255, 0);
+				// printf("%f ",inte);
 			}
-			mlx_pixel_put(data->mlx, data->win.ref, i, j, color);
-			//mlx_pixel_put(data->mlx, data->win.ref, 15, 60, 0x00000000);
+			mlx_pixel_put(data->mlx, data->win.ref, Width- j -1 , Height - i -1, color);
+			mlx_pixel_put(data->mlx, data->win.ref, 15, 60, 0x00FFFFFF);
 			j++;
 		}
 		j = 0;
