@@ -6,7 +6,7 @@
 /*   By: dhaliti <dhaliti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 11:33:33 by dhaliti           #+#    #+#             */
-/*   Updated: 2022/04/27 15:03:10 by dhaliti          ###   ########.fr       */
+/*   Updated: 2022/04/27 16:46:16 by dhaliti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ static void ft_parse_line(char *line, t_parse *parse, t_data *data)
 		parse->cy += ft_cylinder(elem, data);
 	else
 		exit_error("Unexpected map element");
+	free_strs(elem, NULL);
+	if (parse->A > 1 || parse->C > 1 || parse->L > 1)
+		exit_error("data error");
 }
 
 static int ft_is_empty_line(char *line)
@@ -81,5 +84,6 @@ t_data *ft_parse(char *file)
 	if (!parse->A || !parse->L || !parse->C || !parse->pl
 			|| !parse->sp || !parse->cy)
 		exit_error("Scene elements are missing");
+	free(parse);
 	return (data);
 }

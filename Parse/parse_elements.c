@@ -6,28 +6,11 @@
 /*   By: dhaliti <dhaliti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 13:50:32 by dhaliti           #+#    #+#             */
-/*   Updated: 2022/04/27 16:10:08 by dhaliti          ###   ########.fr       */
+/*   Updated: 2022/04/27 16:42:59 by dhaliti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-static void free_strs(char **str, char **str2)
-{
-	int i;
-
-	i = -1;
-	while (str[++i])
-		free (str[i]);
-	free(str);
-	if (str2)
-	{
-		i = -1;
-		while (str2[++i])
-			free (str2[i]);
-		free(str2);
-	}
-}
 
 int ft_ambient(char **elem, t_data *data)
 {
@@ -38,18 +21,18 @@ int ft_ambient(char **elem, t_data *data)
 	int		b;
 
 	if (!elem[2] || elem[3])
-		exit_error("invalid data for A element");
+		exit_error("a Element: invalid data");
 	light = ft_atof(elem[1]);
 	if (light < 0.0 || light > 1.0)
-		exit_error("invalid value for ambient lightining");
+		exit_error("a Element: invalid ambient lightining value");
 	colors = ft_split(elem[2], ',');
 	if (!colors[2] || colors[3])
-		exit_error("invalid ambient lightning coloration");
+		exit_error("a Element: invalid ambient lightning coloration");
 	r = ft_atoi(colors[0]);
 	g = ft_atoi(colors[1]);
 	b = ft_atoi(colors[2]);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-		exit_error("invalid ambient lightning coloration");
+		exit_error("a Element: invalid ambient lightning coloration");
 	data->A->light = light;
 	data->A->r = r;
 	data->A->g = g;
@@ -64,25 +47,25 @@ int ft_camera(char **elem, t_data *data)
 	char 	**vector;
 
 	if (!elem[3] || elem[4])
-		exit_error("invalid data for C element");
+		exit_error("c Element: invalid data");
 	points = ft_split(elem[1], ',');
 	if (!points[2] || points[3])
-		exit_error("Invalid camera coordinates");
+		exit_error("c Element: Invalid camera coordinates");
 	data->C->x = ft_atof(points[0]);
 	data->C->y = ft_atof(points[1]);
 	data->C->z = ft_atof(points[2]);
 	vector = ft_split(elem[2], ',');
 	if (!vector[2] || vector[3])
-		exit_error("Invalid camera orientation");
+		exit_error("c Element: Invalid camera orientation");
 	data->C->x = ft_atof(vector[0]);
 	data->C->y = ft_atof(vector[1]);
 	data->C->z = ft_atof(vector[2]);
 	if (data->C->x < 0.0 || data->C->x > 1.0 || data->C->y < 0.0
 		|| data->C->y > 1.0 || data->C->z < 0.0 || data->C->z > 1.0)
-		exit_error("Invalid camera orientation");
+		exit_error("c Element: Invalid camera orientation");
 	data->C->fov = ft_atof(elem[3]);
 	if (data->C->fov < 0.0 || data->C->fov > 180.0)
-		exit_error("Invalid camera field of view");
+		exit_error("c Element: Invalid camera field of view");
 	free_strs(points, vector);
 	return (1);
 }
@@ -185,7 +168,7 @@ int ft_cylinder(char **elem, t_data *data)
 	char **vector;
 	char **colors;
 
-	if (!elem[3] || elem[4])
+	if (!elem[5] || elem[6])
 		exit_error("Cylinder element: invalid data");
 	points = ft_split(elem[1], ',');
 	if (!points[2] || points[3])
@@ -199,17 +182,19 @@ int ft_cylinder(char **elem, t_data *data)
 	data->pl->vector_x = ft_atof(vector[0]);
 	data->pl->vector_y = ft_atof(vector[1]);
 	data->pl->vector_z = ft_atof(vector[2]);
-	if (!data->pl->vector_x || data->pl->vector_x > 1.0 || !data->pl->vector_y
-	|| data->pl->vector_y > 1.0 || !data->pl->vector_z || data->pl->vector_z > 1.0)
+	if (data->pl->vector_x < 0 || data->pl->vector_x > 1.0 || data->pl->vector_y < 0
+	|| data->pl->vector_y > 1.0 || data->pl->vector_z < 0 || data->pl->vector_z > 1.0)
 		exit_error("Cylinder element: invalid vector orientation");
-	colors = ft_split(elem[3], ',');
+	data->cy->diam = ft_atof(elem[3]);
+	data->cy->height = ft_atof(elem[4]);
+	colors = ft_split(elem[5], ',');
 	if (!colors[2] || colors[3])
 		exit_error("Plan element: invalid colors");
 	data->pl->r = ft_atof(colors[0]);
 	data->pl->g = ft_atof(colors[1]);
 	data->pl->b = ft_atof(colors[2]);
-	if (!data->pl->r || data->pl->r > 255 || !data->pl->g || data->pl->g > 255
-		|| !data->pl->b || data->pl->b > 255)
+	if (data->pl->r < 0 || data->pl->r > 255 || data->pl->g < 0 || data->pl->g > 255
+		|| data->pl->b < 0 || data->pl->b > 255)
 		exit_error("Cylinder element: invalid color values");
 	free_strs(points, colors);
 	return (1);
