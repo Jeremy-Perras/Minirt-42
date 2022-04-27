@@ -6,7 +6,7 @@
 /*   By: dhaliti <dhaliti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 11:33:56 by dhaliti           #+#    #+#             */
-/*   Updated: 2022/04/27 15:07:15 by dhaliti          ###   ########.fr       */
+/*   Updated: 2022/04/27 17:00:33 by dhaliti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ typedef struct s_L
 	double x;
 	double y;
 	double z;
-	int r;
-	int g;
-	int b;
+	double r;
+	double g;
+	double b;
 	double light;
 }	t_L;
 
@@ -120,6 +120,7 @@ int 	ft_light(char **elem, t_data *data);
 int 	ft_sphere(char **elem, t_data *data);
 int 	ft_plan(char **elem, t_data *data);
 int 	ft_cylinder(char **elem, t_data *data);
+void 	free_strs(char **str, char **str2);
 
 
 #endif

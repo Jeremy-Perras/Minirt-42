@@ -6,7 +6,7 @@
 /*   By: dhaliti <dhaliti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 14:37:41 by dhaliti           #+#    #+#             */
-/*   Updated: 2022/04/27 14:55:12 by dhaliti          ###   ########.fr       */
+/*   Updated: 2022/04/27 16:39:04 by dhaliti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,21 @@ int	ft_strcmp(char *s1, char *s2)
 	if ((s1[i] - s2[i]) != 0)
 		return (0);
 	return (1);
+}
+
+void free_strs(char **str, char **str2)
+{
+	int i;
+
+	i = -1;
+	while (str[++i])
+		free (str[i]);
+	free(str);
+	if (str2)
+	{
+		i = -1;
+		while (str2[++i])
+			free (str2[i]);
+		free(str2);
+	}
 }
