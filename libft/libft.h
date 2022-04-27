@@ -93,6 +93,9 @@ void			p_format(t_printf *tab);
 void			u_format(t_printf *tab);
 void			x_format(t_printf *tab, int index);
 char			*get_next_line(int fd);
+<<<<<<< HEAD
 double			ft_atof(const char *str);
+=======
+>>>>>>> 9082a84659256329d7afb25adacedcefef856d3c
 
 #endif

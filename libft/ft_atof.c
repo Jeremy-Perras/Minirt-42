@@ -1,31 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   atof.c                                             :+:      :+:    :+:   */
+/*   ft_atof.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhaliti <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: dhaliti <dhaliti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:10:24 by dhaliti           #+#    #+#             */
-/*   Updated: 2022/04/27 11:10:35 by dhaliti          ###   ########.fr       */
+/*   Updated: 2022/04/27 16:01:28 by dhaliti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+#include <math.h>
+
 double	ft_atof(const char *str)
 {
-	double	res;
-	double	res2;
-	char	*c;
-	int		len;
+	double	int_part;
+	double	dec_part;
+	double	sign;
+	int		i;
 
-	c = (char *)str;
-	res = (double)ft_atoi(c);
-	while (*c && *c != '.')
-		c++;
-	if (*c == '.')
-		c++;
-	res2 = (double)ft_atoi(c);
-	len = ft_strlen(c);
-	while (len--)
-		res2 /= 10;
-	return (res + ((res > 0) ? res2 : -res2));
+	int_part = 0.0;
+	dec_part = 0.0;
+	sign = 1.0;
+	if (*str == '+' || *str == '-')
+		if (*str++ == '-')
+			sign = -1.0;
+	while (ft_isdigit(*str))
+		int_part = int_part * 10 + (*str++ - '0');
+	i = -1;
+	if (*str == '.' && *str++)
+	{
+		while (ft_isdigit(*str))
+			dec_part += (pow(10, i--) * (*str++ - '0'));
+	}
+	return (sign * (int_part + dec_part));
 }
