@@ -6,7 +6,7 @@
 /*   By: jperras <jperras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 11:03:23 by jperras           #+#    #+#             */
-/*   Updated: 2022/04/28 10:54:53 by dhaliti          ###   ########.fr       */
+/*   Updated: 2022/04/28 11:18:28 by jperras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,39 +23,12 @@
 # define Width 1024
 # define FOV ((60 * M_PI) / 180)
 
-
 typedef struct s_vector
 {
  double x;
  double y;
  double z;
- double color;
 } t_vector;
-
-typedef struct s_ray
-{
-  t_vector  origin;
-  t_vector  dir;
-} t_ray;
-
-typedef struct s_sphere
-{
-  t_vector  origin;
-  t_vector  dir;
-  double    ra;
-} t_sphere;
-
-typedef struct s_lumiere
-{
-  t_vector  origin;
-  double    intensite;
-} t_lumiere;
-
-typedef struct scene
-{
-  t_sphere *sphere;
-} t_scene;
-
 
 typedef struct s_size
 {
@@ -63,26 +36,11 @@ typedef struct s_size
  int y;
 } t_size;
 
-typedef struct s_image
-{
-  void * ref;
-  t_size size;
-} t_image;
-
 typedef struct s_window
 {
   void *ref;
   t_size size;
 } t_win;
-
-typedef struct s_data
-{
-  void *mlx;
-  t_win win;
-  t_image *image;
-  t_vector **matrice;
-  t_scene scene;
-} t_data;
 
 typedef struct s_cy
 {
@@ -141,6 +99,7 @@ typedef struct s_C
 	double vector_y;
 	double vector_z;
 	double fov;
+  t_vector vector;
 }	t_C;
 
 typedef struct s_L
@@ -154,15 +113,7 @@ typedef struct s_L
 	double light;
 }	t_L;
 
-typedef struct s_data
-{
-	t_A *A;
-	t_C *C;
-	t_L *L;
-	t_sp *sp;
-	t_pl *pl;
-	t_cy *cy;
-}	t_data;
+
 
 typedef struct s_parse
 {
@@ -174,28 +125,36 @@ typedef struct s_parse
 	int		cy;
 } t_parse;
 
+typedef struct s_data
+{
+  void *mlx;
+  t_win win;
+	t_A *A;
+	t_C *C;
+	t_L *L;
+	t_sp *sp;
+	t_pl *pl;
+	t_cy *cy;
+}	t_data;
+
 /*
 parse.c
 */
 t_data 	*ft_parse(char *map);
-
 /*
 init_data.c
 */
 void 	ft_init_data(t_data **data);
-
 /*
 ft_split2.c
 */
 char	**ft_split2(char *str, char *charset);
-
 /*
 utils_parse.c
 */
 void 	exit_error(char *msg);
 int		ft_strcmp(char *s1, char *s2);
 void 	free_strs(char **str, char **str2);
-
 /*
 parse_elements.c
 */
@@ -205,13 +164,11 @@ int 	ft_light(char **elem, t_data *data);
 int 	ft_sphere(char **elem, t_data *data);
 int 	ft_plan(char **elem, t_data *data);
 int 	ft_cylinder(char **elem, t_data *data);
-
 /*
 * windows.c
 */
 t_win   ft_windows(void *mlx, int widht, int height, char *title);
 void ft_put_pixel(t_data *data);
-
 /*
 * vector.c
 */

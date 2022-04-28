@@ -6,7 +6,7 @@
 /*   By: jperras <jperras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 13:36:16 by jperras           #+#    #+#             */
-/*   Updated: 2022/04/28 10:37:13 by jperras          ###   ########.fr       */
+/*   Updated: 2022/04/28 11:08:30 by jperras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,17 @@ void ft_put_pixel(t_data *data)
 	int m;
 	int color;
 
-	lumiere.origin.x = 1024/2 ;
-	lumiere.origin.y = 60;
-	lumiere.origin.z = -40;
-	lumiere.intensite = 255;
-	sphere.origin.x = 0;
-	sphere.origin.y = 0;
-	sphere.origin.z = -55;
-	sphere.ra = 20;
-	ray.origin.x = 0;
-	ray.origin.y = 0;
-	ray.origin.z = 0;
+	// lumiere.origin.x = 1024/2 ;
+	// lumiere.origin.y = 60;
+	// lumiere.origin.z = -40;
+	// lumiere.intensite = 255;
+	// sphere.origin.x = 0;
+	// sphere.origin.y = 0;
+	// sphere.origin.z = -55;
+	// sphere.ra = 20;
+	// ray.origin.x = 0;
+	// ray.origin.y = 0;
+	// ray.origin.z = 0;
 	i = 0;
 	j = 0;
 	while (i < Height)
@@ -61,9 +61,9 @@ void ft_put_pixel(t_data *data)
 		while(j < Width)
 		{
 			color = create_trgb(0,0,0,0);
-			ray.dir.x = j - Width / 2;
-			ray.dir.y = i - Height / 2;
-			ray.dir.z = -(Width / 2) / tan(FOV/2);
+			data->C.vector_x = j - Width / 2;
+			delta->C.vector_y = i - Height / 2;
+			delta->C.vecotr_z = -(Width / 2) / tan(FOV/2);
 			ray.dir = ft_norm(ray.dir);
 			k = ft_intermin(ray,&P, &N, data);
 			inte = 0;
