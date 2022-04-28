@@ -6,11 +6,11 @@
 /*   By: dhaliti <dhaliti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 11:04:47 by dhaliti           #+#    #+#             */
-/*   Updated: 2022/04/27 15:10:17 by dhaliti          ###   ########.fr       */
+/*   Updated: 2022/04/28 12:23:03 by jperras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt.h"
+#include "minirt.h"
 
 static int	ft_is_separator(char *str, char *charset)
 {

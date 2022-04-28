@@ -6,11 +6,11 @@
 /*   By: dhaliti <dhaliti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 10:49:49 by dhaliti           #+#    #+#             */
-/*   Updated: 2022/04/28 11:36:53 by dhaliti          ###   ########.fr       */
+/*   Updated: 2022/04/28 12:25:17 by jperras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt.h"
+#include "minirt.h"
 
 
 static void ft_init_cylinder(t_cy *cy)
@@ -24,8 +24,8 @@ static void ft_init_cylinder(t_cy *cy)
 	cy->diam = 0;
 	cy->height = 0;
 	cy->r = 0;
+	cy->g = 0;
 	cy->b = 0;
-	cy->c = 0;
 }
 
 static void ft_init_plan(t_pl *pl)
@@ -80,8 +80,8 @@ void ft_init_data(t_data **data)
 	tmp->C->fov = 0;
 	tmp->L = (t_L *)malloc(sizeof(t_L));
 	tmp->L->origin.x = 0;
-	tmp->L->orign.y = 0;
-	tmp->L->orign.z = 0;
+	tmp->L->origin.y = 0;
+	tmp->L->origin.z = 0;
 	tmp->L->light = 0;
 	tmp->sp = (t_sp *)malloc(sizeof(t_sp));
 	tmp->pl = (t_pl *)malloc(sizeof(t_pl));

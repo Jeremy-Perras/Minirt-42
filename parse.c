@@ -6,11 +6,11 @@
 /*   By: dhaliti <dhaliti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 11:33:33 by dhaliti           #+#    #+#             */
-/*   Updated: 2022/04/27 16:46:16 by dhaliti          ###   ########.fr       */
+/*   Updated: 2022/04/28 12:25:20 by jperras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt.h"
+#include "minirt.h"
 
 static void ft_parse_line(char *line, t_parse *parse, t_data *data)
 {

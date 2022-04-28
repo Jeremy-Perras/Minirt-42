@@ -6,7 +6,7 @@
 /*   By: jperras <jperras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 10:04:07 by jperras           #+#    #+#             */
-/*   Updated: 2022/04/28 12:06:28 by jperras          ###   ########.fr       */
+/*   Updated: 2022/04/28 13:21:58 by jperras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int main(int ac, char **av)
 		exit_error("Error\nInvalid scene description file");
   data = ft_parse(av[1]);
   data->mlx = mlx_init();
-  data->win = ft_windows(data->mlx,Width , Height, "test");
+  data->win = ft_windows(data->mlx, Width , Height, "test");
+  ft_put_background(data);
   ft_put_pixel(data);
   mlx_loop(data->mlx);
 }

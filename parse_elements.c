@@ -6,11 +6,11 @@
 /*   By: dhaliti <dhaliti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 13:50:32 by dhaliti           #+#    #+#             */
-/*   Updated: 2022/04/28 11:42:45 by dhaliti          ###   ########.fr       */
+/*   Updated: 2022/04/28 12:25:19 by jperras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt.h"
+#include "minirt.h"
 
 int ft_ambient(char **elem, t_data *data)
 {
