@@ -6,7 +6,7 @@
 #    By: dhaliti <dhaliti@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/14 01:08:17 by dhaliti           #+#    #+#              #
-#    Updated: 2022/04/27 15:16:25 by dhaliti          ###   ########.fr        #
+#    Updated: 2022/04/28 10:55:42 by dhaliti          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ RED			= \033[0;31m
 RST			= \033[0m
 END			= \e[0m
 
-SRCS		= main.c parse.c parse_elements.c init_data.c ft_split2.c utils.c
+SRCS		= main.c parse.c parse_elements.c init_data.c ft_split2.c utils_parse.c
 NAME		= miniRT
 OBJS_DIR	= objs/
 OBJS		= $(SRCS:.c=.o)

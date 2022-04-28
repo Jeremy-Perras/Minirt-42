@@ -6,7 +6,7 @@
 /*   By: jperras <jperras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 11:03:23 by jperras           #+#    #+#             */
-/*   Updated: 2022/04/28 10:53:15 by dhaliti          ###   ########.fr       */
+/*   Updated: 2022/04/28 10:54:53 by dhaliti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,7 @@ ft_split2.c
 char	**ft_split2(char *str, char *charset);
 
 /*
-utils.c
+utils_parse.c
 */
 void 	exit_error(char *msg);
 int		ft_strcmp(char *s1, char *s2);
