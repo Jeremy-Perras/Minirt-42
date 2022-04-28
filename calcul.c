@@ -6,7 +6,7 @@
 /*   By: jperras <jperras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:36:41 by jperras           #+#    #+#             */
-/*   Updated: 2022/04/28 15:16:08 by jperras          ###   ########.fr       */
+/*   Updated: 2022/04/28 15:54:56 by jperras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ double ft_intermulti(t_data *data, t_vector *P, t_vector *N,int i)
   t_vector vector;
   (void) P;
   (void) N;
-  //double t;
+  double t;
 
   a = 1;
   vector.x = data->C->origin.x - data->sp[i].origin.x ;
@@ -61,22 +61,19 @@ double ft_intermulti(t_data *data, t_vector *P, t_vector *N,int i)
     return(0);
   t1 = (-b - sqrt(delta)) / (2 * a);
   t2 = (-b + sqrt(delta)) / (2 * a);
-  // if (t2 < 0)
-  //    return(0);
-  if(t2 > 0)
-    return(1);
-  return(0);
-  // if(t1 > 0)
-  //   t = t1;
-  // else
-  //   t = t2;
-  // P->x = data->C->origin.x + t * data->C->vector.x;
-  // P->y = data->C->origin.y + t * data->C->vector.y;
-  // P->z = data->C->origin.z + t * data->C->vector.z;
-  // N->x = P->x-sp.origin.x;
-  // N->y = P->y-sp.origin.y;
-  // N->z = P->z-sp.origin.z;
-  // *N = ft_norm(*N);
-  // return(t);
+  if (t2 < 0)
+     return(0);
+  if(t1 > 0)
+    t = t1;
+  else
+    t = t2;
+  P->x = data->C->origin.x + t * data->C->vector.x;
+  P->y = data->C->origin.y + t * data->C->vector.y;
+  P->z = data->C->origin.z + t * data->C->vector.z;
+  N->x = P->x-data->sp[i].origin.x;
+  N->y = P->y-data->sp[i].origin.y;
+  N->z = P->z-data->sp[i].origin.z;
+  *N = ft_norm(*N);
+  return(t);
 
 }

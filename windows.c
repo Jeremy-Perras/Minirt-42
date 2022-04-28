@@ -6,7 +6,7 @@
 /*   By: jperras <jperras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 13:36:16 by jperras           #+#    #+#             */
-/*   Updated: 2022/04/28 15:11:29 by jperras          ###   ########.fr       */
+/*   Updated: 2022/04/28 16:02:06 by jperras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void ft_put_pixel(t_data *data)
 	t_vector P;
 	t_vector N;
 	double inte;
-	//t_vector vector;
-	//int color;
+	t_vector vector;
+	int color;
 	int lum;
 
 
@@ -71,25 +71,24 @@ void ft_put_pixel(t_data *data)
 			data->C->vector.x = j - Width / 2;
 			data->C->vector.y = i - Height / 2;
 			data->C->vector.z = -(Width / (2 * tan(((data->C->fov * M_PI) / 180)/2)));
-			// k = ft_intermin(&P, &N, data);
-			k = ft_intermulti(data,&P, &N,0);
+			data->C->vector = ft_norm(data->C->vector);
+		 	k = ft_intermin(&P, &N, data);
 			inte = 0;
 			if(k)
 			{
-				// vector.x = data->L->origin.x - P.x;
-				// vector.y = data->L->origin.y - P.y;
-				// vector.z = data->L->origin.z - P.z;
-				// vector = ft_norm(vector);
-				// inte = lum * (ft_sca(vector, N) / ft_norm2(vector));
-				// if (inte > 255)
-				// 	inte = 255;
-				// if(inte < 0)
-				// 	inte = 0;
-				// if(inte != 0)
-				// 	color = create_trgb(inte, data->sp->r, data->sp->g, data->sp->b);
+				vector.x = data->L->origin.x - P.x;
+				vector.y = data->L->origin.y - P.y;
+				vector.z = data->L->origin.z - P.z;
+				vector = ft_norm(vector);
+				inte = lum * (ft_sca(vector, N) / ft_norm2(vector));
+				if (inte > 255)
+					inte = 255;
+				if(inte < 0)
+					inte = 0;
+				if(inte != 0)
+					color = create_trgb(inte, data->sp->r, data->sp->g, data->sp->b);
+				mlx_pixel_put(data->mlx, data->win.ref,  j, i, color);
 			}
-			if(k)
-				mlx_pixel_put(data->mlx, data->win.ref,  j, i, 0X00FF0000);
 			j++;
 		}
 		j = 0;
