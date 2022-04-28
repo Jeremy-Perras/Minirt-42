@@ -6,7 +6,7 @@
 /*   By: dhaliti <dhaliti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 10:49:49 by dhaliti           #+#    #+#             */
-/*   Updated: 2022/04/28 11:03:52 by jperras          ###   ########.fr       */
+/*   Updated: 2022/04/28 11:36:53 by dhaliti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 static void ft_init_cylinder(t_cy *cy)
 {
-	cy->x = 0;
-	cy->y = 0;
-	cy->z = 0;
-	cy->vector_x = 0;
-	cy->vector_y = 0;
-	cy->vector_z = 0;
+	cy->origin.x = 0;
+	cy->origin.y = 0;
+	cy->origin.z = 0;
+	cy->vector.x = 0;
+	cy->vector.y = 0;
+	cy->vector.z = 0;
 	cy->diam = 0;
 	cy->height = 0;
 	cy->r = 0;
@@ -30,12 +30,12 @@ static void ft_init_cylinder(t_cy *cy)
 
 static void ft_init_plan(t_pl *pl)
 {
-	pl->x = 0;
-	pl->y = 0;
-	pl->z = 0;
-	pl->vector_x = 0;
-	pl->vector_y = 0;
-	pl->vector_z = 0;
+	pl->origin.x = 0;
+	pl->origin.y = 0;
+	pl->origin.z = 0;
+	pl->vector.x = 0;
+	pl->vector.y = 0;
+	pl->vector.z = 0;
 	pl->r = 0;
 	pl->g = 0;
 	pl->b = 0;
@@ -43,9 +43,9 @@ static void ft_init_plan(t_pl *pl)
 
 static void ft_init_sphere(t_sp *sp)
 {
-	sp->x = 0;
-	sp->y = 0;
-	sp->z = 0;
+	sp->origin.x = 0;
+	sp->origin.y = 0;
+	sp->origin.z = 0;
 	sp->diam = 0;
 	sp->r = 0;
 	sp->g = 0;
@@ -71,17 +71,17 @@ void ft_init_data(t_data **data)
 	tmp->A->g = 0;
 	tmp->A->b = 0;
 	tmp->C = (t_C *)malloc(sizeof(t_C));
-	tmp->C->x = 0;
-	tmp->C->y = 0;
-	tmp->C->z = 0;
-	tmp->C->vector_x = 0;
-	tmp->C->vector_y = 0;
-	tmp->C->vector_z = 0;
+	tmp->C->origin.x = 0;
+	tmp->C->origin.y = 0;
+	tmp->C->origin.z = 0;
+	tmp->C->vector.x = 0;
+	tmp->C->vector.y = 0;
+	tmp->C->vector.z = 0;
 	tmp->C->fov = 0;
 	tmp->L = (t_L *)malloc(sizeof(t_L));
-	tmp->L->x = 0;
-	tmp->L->y = 0;
-	tmp->L->z = 0;
+	tmp->L->origin.x = 0;
+	tmp->L->orign.y = 0;
+	tmp->L->orign.z = 0;
 	tmp->L->light = 0;
 	tmp->sp = (t_sp *)malloc(sizeof(t_sp));
 	tmp->pl = (t_pl *)malloc(sizeof(t_pl));

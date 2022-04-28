@@ -6,7 +6,7 @@
 /*   By: jperras <jperras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 11:03:23 by jperras           #+#    #+#             */
-/*   Updated: 2022/04/28 11:18:28 by jperras          ###   ########.fr       */
+/*   Updated: 2022/04/28 11:38:03 by dhaliti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_vector
  double z;
 } t_vector;
 
+
 typedef struct s_size
 {
  int x;
@@ -44,12 +45,14 @@ typedef struct s_window
 
 typedef struct s_cy
 {
-	double x;
-	double y;
-	double z;
-	double vector_x;
-	double vector_y;
-	double vector_z;
+	t_vector vector;
+	t_vector origin;
+	// double x;
+	// double y;
+	// double z;
+	// double vector_x;
+	// double vector_y;
+	// double vector_z;
 	double diam;
 	double height;
 	double r;
@@ -60,22 +63,25 @@ typedef struct s_cy
 
 typedef struct s_pl
 {
-	double x;
-	double y;
-	double z;
-	double vector_x;
-	double vector_y;
-	double vector_z;
+	// double x;
+	// double y;
+	// double z;
+	// double vector_x;
+	// double vector_y;
+	// double vector_z;
 	double r;
 	double g;
 	double b;
+	t_vector origin;
+	t_vector vector;
 }	t_pl;
 
 typedef struct s_sp
 {
-	double x;
-	double y;
-	double z;
+	t_vector origin;
+	// double x;
+	// double y;
+	// double z;
 	double diam;
 	double r;
 	double g;
@@ -92,21 +98,23 @@ typedef struct s_A
 
 typedef struct s_C
 {
-	double x;
-	double y;
-	double z;
-	double vector_x;
-	double vector_y;
-	double vector_z;
+	// double x;
+	// double y;
+	// double z;
+	t_vector origin;
+	// double vector_x;
+	// double vector_y;
+	// double vector_z;
 	double fov;
   t_vector vector;
 }	t_C;
 
 typedef struct s_L
 {
-	double x;
-	double y;
-	double z;
+	// double x;
+	// double y;
+	// double z;
+	t_vector origin;
 	double r;
 	double g;
 	double b;
@@ -127,8 +135,8 @@ typedef struct s_parse
 
 typedef struct s_data
 {
-  void *mlx;
-  t_win win;
+  	void *mlx;
+  	t_win win;
 	t_A *A;
 	t_C *C;
 	t_L *L;
