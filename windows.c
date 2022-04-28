@@ -6,7 +6,7 @@
 /*   By: jperras <jperras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 13:36:16 by jperras           #+#    #+#             */
-/*   Updated: 2022/04/28 14:15:45 by jperras          ###   ########.fr       */
+/*   Updated: 2022/04/28 15:11:29 by jperras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ void ft_put_pixel(t_data *data)
 		{
 			data->C->vector.x = j - Width / 2;
 			data->C->vector.y = i - Height / 2;
-			data->C->vector.z = -(Width / 2) / tan(((data->C->fov * M_PI) / 180)/2);
+			data->C->vector.z = -(Width / (2 * tan(((data->C->fov * M_PI) / 180)/2)));
 			// k = ft_intermin(&P, &N, data);
-			k = ft_intermulti(data, data->sp[1],&P, &N);
+			k = ft_intermulti(data,&P, &N,0);
 			inte = 0;
 			if(k)
 			{
@@ -89,7 +89,7 @@ void ft_put_pixel(t_data *data)
 				// 	color = create_trgb(inte, data->sp->r, data->sp->g, data->sp->b);
 			}
 			if(k)
-				mlx_pixel_put(data->mlx, data->win.ref, Width - j, Height - i, 0X00FF0000);
+				mlx_pixel_put(data->mlx, data->win.ref,  j, i, 0X00FF0000);
 			j++;
 		}
 		j = 0;

@@ -6,7 +6,7 @@
 /*   By: jperras <jperras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:36:41 by jperras           #+#    #+#             */
-/*   Updated: 2022/04/28 14:17:13 by jperras          ###   ########.fr       */
+/*   Updated: 2022/04/28 15:16:08 by jperras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int ft_intermin(t_vector *P, t_vector *N, t_data * data)
   i = 0;
   while (i < 1)
   {
-    tmp = ft_intermulti(data, data->sp[i], P, N);
+    tmp = ft_intermulti(data, P, N, i);
     if (tmp != 0 && tmp < min && tmp > 0)
     {
       min = tmp;
@@ -37,7 +37,7 @@ int ft_intermin(t_vector *P, t_vector *N, t_data * data)
   return(0);
 }
 
-double ft_intermulti(t_data *data, t_sp sp, t_vector *P, t_vector *N)
+double ft_intermulti(t_data *data, t_vector *P, t_vector *N,int i)
 {
   double a;
   double b;
@@ -51,12 +51,11 @@ double ft_intermulti(t_data *data, t_sp sp, t_vector *P, t_vector *N)
   //double t;
 
   a = 1;
-  vector.x = data->C->origin.x - data->sp->origin.x ;
-  vector.y = data->C->origin.y - data->sp->origin.y ;
-  vector.z = data->C->origin.z - data->sp->origin.z ;
+  vector.x = data->C->origin.x - data->sp[i].origin.x ;
+  vector.y = data->C->origin.y - data->sp[i].origin.y ;
+  vector.z = data->C->origin.z - data->sp[i].origin.z ;
   b = 2.0 * ft_sca(data->C->vector, vector);
-  c = ft_norm2(vector) - (sp.diam / 2) * (sp.diam / 2);
-
+  c = ft_norm2(vector) - (data->sp[i].diam / 2) * (data->sp[i].diam / 2);
   delta = b * b - 4 * a * c;
   if (delta < 0)
     return(0);

@@ -6,7 +6,7 @@
 /*   By: jperras <jperras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 11:03:23 by jperras           #+#    #+#             */
-/*   Updated: 2022/04/28 13:43:26 by jperras          ###   ########.fr       */
+/*   Updated: 2022/04/28 14:51:02 by jperras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,7 @@ t_vector ft_norm(t_vector vector);
 * calcul.c
 */
 int ft_intermin(t_vector *P, t_vector *N, t_data * data);
-double ft_intermulti(t_data *data, t_sp sphere, t_vector *P, t_vector *N);
+double ft_intermulti(t_data *data, t_vector *P, t_vector *N, int i);
 /*
 * utils.c
 */
