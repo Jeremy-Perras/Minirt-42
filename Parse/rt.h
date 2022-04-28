@@ -6,7 +6,7 @@
 /*   By: dhaliti <dhaliti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 11:33:56 by dhaliti           #+#    #+#             */
-/*   Updated: 2022/04/27 17:00:33 by dhaliti          ###   ########.fr       */
+/*   Updated: 2022/04/28 10:47:01 by dhaliti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_cy
 	double height;
 	double r;
 	double b;
-	double c;
+	double g;
 }	t_cy;
 
 typedef struct s_pl

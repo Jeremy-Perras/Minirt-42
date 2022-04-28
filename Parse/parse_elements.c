@@ -6,7 +6,7 @@
 /*   By: dhaliti <dhaliti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 13:50:32 by dhaliti           #+#    #+#             */
-/*   Updated: 2022/04/27 16:42:59 by dhaliti          ###   ########.fr       */
+/*   Updated: 2022/04/28 10:47:46 by dhaliti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,11 +190,11 @@ int ft_cylinder(char **elem, t_data *data)
 	colors = ft_split(elem[5], ',');
 	if (!colors[2] || colors[3])
 		exit_error("Plan element: invalid colors");
-	data->pl->r = ft_atof(colors[0]);
-	data->pl->g = ft_atof(colors[1]);
-	data->pl->b = ft_atof(colors[2]);
-	if (data->pl->r < 0 || data->pl->r > 255 || data->pl->g < 0 || data->pl->g > 255
-		|| data->pl->b < 0 || data->pl->b > 255)
+	data->cy->r = ft_atof(colors[0]);
+	data->cy->g = ft_atof(colors[1]);
+	data->cy->b = ft_atof(colors[2]);
+	if (data->cy->r < 0 || data->cy->r > 255 || data->cy->g < 0 || data->cy->g > 255
+		|| data->cy->b < 0 || data->cy->b > 255)
 		exit_error("Cylinder element: invalid color values");
 	free_strs(points, colors);
 	return (1);
