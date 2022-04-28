@@ -6,7 +6,7 @@
 /*   By: jperras <jperras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 11:03:23 by jperras           #+#    #+#             */
-/*   Updated: 2022/04/27 15:06:52 by jperras          ###   ########.fr       */
+/*   Updated: 2022/04/28 10:14:38 by jperras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <fcntl.h>
 # define Height 1024
 # define Width 1024
-# define Screen 128
 # define FOV ((60 * M_PI) / 180)
 
 
@@ -33,24 +32,30 @@ typedef struct s_vector
  double color;
 } t_vector;
 
-typedef struct ray
+typedef struct s_ray
 {
   t_vector  origin;
   t_vector  dir;
 } t_ray;
 
-typedef struct sphere
+typedef struct s_sphere
 {
   t_vector  origin;
   t_vector  dir;
-  double ra;
+  double    ra;
 } t_sphere;
 
-typedef struct lumiere
+typedef struct s_lumiere
 {
   t_vector  origin;
-  double intensite;
+  double    intensite;
 } t_lumiere;
+
+typedef struct scene
+{
+  t_sphere *sphere;
+} t_scene;
+
 
 typedef struct s_size
 {
@@ -76,6 +81,7 @@ typedef struct s_data
   t_win win;
   t_image *image;
   t_vector **matrice;
+  t_scene scene;
 } t_data;
 
 /*
@@ -100,8 +106,9 @@ t_vector ft_norm(t_vector vector);
 /*
 * calcul.c
 */
-//int ft_inter(t_ray ray, t_sphere sphere);
 int ft_inter(t_ray ray, t_sphere sphere, t_vector *P, t_vector *N);
+double ft_intermulti(t_ray ray, t_sphere sphere, t_vector *P, t_vector *N);
+int ft_intermin(t_ray ray, t_vector *P, t_vector *N, t_data * data);
 /*
 * utils.c
 */

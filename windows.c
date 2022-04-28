@@ -6,7 +6,7 @@
 /*   By: jperras <jperras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 13:36:16 by jperras           #+#    #+#             */
-/*   Updated: 2022/04/27 17:07:57 by jperras          ###   ########.fr       */
+/*   Updated: 2022/04/28 10:37:13 by jperras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,10 @@ void ft_put_pixel(t_data *data)
 	double inte;
 	t_vector vector;
 	int m;
-	//int n;
-	//char c[2];
 	int color;
 
-	lumiere.origin.x = 15 ;
-	lumiere.origin.y = 60 ;
+	lumiere.origin.x = 1024/2 ;
+	lumiere.origin.y = 60;
 	lumiere.origin.z = -40;
 	lumiere.intensite = 255;
 	sphere.origin.x = 0;
@@ -67,7 +65,7 @@ void ft_put_pixel(t_data *data)
 			ray.dir.y = i - Height / 2;
 			ray.dir.z = -(Width / 2) / tan(FOV/2);
 			ray.dir = ft_norm(ray.dir);
-			k = ft_inter(ray, sphere, &P, &N);
+			k = ft_intermin(ray,&P, &N, data);
 			inte = 0;
 			if(k)
 			{
@@ -81,15 +79,8 @@ void ft_put_pixel(t_data *data)
 				if(inte < 0)
 					inte = 0;
 				m = 0;
-				//c[0] = '0';
-				//c[1] = '0';
-				//n = 0;
-				//ft_puthexa(inte, &m, c);
-				//n += ft_atoi(&c[0]);
-				//n += ft_atoi(&c[1]);
 				if(inte != 0)
 					color = create_trgb(inte, 0, 255, 0);
-				// printf("%f ",inte);
 			}
 			mlx_pixel_put(data->mlx, data->win.ref, Width- j -1 , Height - i -1, color);
 			mlx_pixel_put(data->mlx, data->win.ref, 15, 60, 0x00FFFFFF);
