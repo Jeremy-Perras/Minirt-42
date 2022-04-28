@@ -6,7 +6,7 @@
 /*   By: jperras <jperras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 11:03:23 by jperras           #+#    #+#             */
-/*   Updated: 2022/04/28 11:38:03 by dhaliti          ###   ########.fr       */
+/*   Updated: 2022/04/28 12:16:35 by jperras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,6 @@ typedef struct s_cy
 {
 	t_vector vector;
 	t_vector origin;
-	// double x;
-	// double y;
-	// double z;
-	// double vector_x;
-	// double vector_y;
-	// double vector_z;
 	double diam;
 	double height;
 	double r;
@@ -63,12 +57,6 @@ typedef struct s_cy
 
 typedef struct s_pl
 {
-	// double x;
-	// double y;
-	// double z;
-	// double vector_x;
-	// double vector_y;
-	// double vector_z;
 	double r;
 	double g;
 	double b;
@@ -79,9 +67,6 @@ typedef struct s_pl
 typedef struct s_sp
 {
 	t_vector origin;
-	// double x;
-	// double y;
-	// double z;
 	double diam;
 	double r;
 	double g;
@@ -98,22 +83,13 @@ typedef struct s_A
 
 typedef struct s_C
 {
-	// double x;
-	// double y;
-	// double z;
 	t_vector origin;
-	// double vector_x;
-	// double vector_y;
-	// double vector_z;
 	double fov;
   t_vector vector;
 }	t_C;
 
 typedef struct s_L
 {
-	// double x;
-	// double y;
-	// double z;
 	t_vector origin;
 	double r;
 	double g;

@@ -6,13 +6,13 @@
 /*   By: jperras <jperras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 10:04:07 by jperras           #+#    #+#             */
-/*   Updated: 2022/04/28 11:05:20 by jperras          ###   ########.fr       */
+/*   Updated: 2022/04/28 12:06:28 by jperras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "minirt.h"
 
-int main(void)
+int main(int ac, char **av)
 {
   t_data  *data;
 
@@ -26,6 +26,6 @@ int main(void)
   data = ft_parse(av[1]);
   data->mlx = mlx_init();
   data->win = ft_windows(data->mlx,Width , Height, "test");
-  ft_put_pixel(&data);
-  mlx_loop(data.mlx);
+  ft_put_pixel(data);
+  mlx_loop(data->mlx);
 }
