@@ -6,7 +6,7 @@
 /*   By: jperras <jperras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 11:03:23 by jperras           #+#    #+#             */
-/*   Updated: 2022/04/29 11:47:21 by jperras          ###   ########.fr       */
+/*   Updated: 2022/04/29 16:38:40 by jperras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,7 @@ int 	ft_cylinder(char **elem, t_data *data);
 t_win   ft_windows(void *mlx, int widht, int height, char *title);
 void ft_put_pixel(t_data *data);
 void ft_put_background(t_data *data);
+int	ft_close(void);
 /*
 * vector.c
 */
@@ -182,10 +183,17 @@ double ft_intermulti(t_data *data, t_vector *P, t_vector *N, int i);
 * calcul2.c
 */
 int ft_interplan(t_data *data);
-
+/*
+* calcul2.c
+*/
+int ft_cylinder2(t_data *data);
 /*
 * utils.c
 */
 int	create_trgb(int t, int r, int g, int b);
 void	ft_puthexa(int b, int *m, char *c);
+/*
+* hooks.c
+*/
+void ft_hooks(t_data *data);
 #endif

@@ -6,13 +6,13 @@
 /*   By: jperras <jperras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 13:36:16 by jperras           #+#    #+#             */
-/*   Updated: 2022/04/29 13:49:30 by jperras          ###   ########.fr       */
+/*   Updated: 2022/04/29 16:45:40 by jperras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static int	ft_close(void)
+int	ft_close(void)
 {
 	exit(0);
 }
@@ -55,13 +55,14 @@ void ft_put_pixel(t_data *data)
 	int	j;
 	int k;
 	int	l;
+	int m;
 	t_vector P;
 	t_vector N;
 	double inte;
 	t_vector vector;
 	int color;
 	int lum;
-	// t_ray ray;
+
 
 
 	i = 0;
@@ -78,8 +79,9 @@ void ft_put_pixel(t_data *data)
 			data->C->vector = ft_norm(data->C->vector);
 			l = ft_intermin(&P, &N, data);
 			k = ft_interplan(data);
+			m = ft_cylinder2(data);
 			inte = 0;
-			if( k)
+			if(m)
 			{
 				vector.x = data->L->origin.x - P.x;
 				vector.y = data->L->origin.y - P.y;
@@ -91,10 +93,10 @@ void ft_put_pixel(t_data *data)
 				if(inte < 0)
 					inte = 0;
 				if(inte != 0)
-					color = create_trgb(inte, data->sp->r, data->sp->g, data->sp->b);
+					color = create_trgb(100, data->sp->r, data->sp->g, data->sp->b);
 				mlx_pixel_put(data->mlx, data->win.ref,  j, i, color);
 			}
-			 //lx_pixel_put(data->mlx, data->win.ref,  j, i, color);
+			 // mlx_pixel_put(data->mlx, data->win.ref,  j, i, color);
 			j++;
 		}
 		j = 0;

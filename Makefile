@@ -6,14 +6,14 @@
 #    By: jperras <jperras@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/22 08:57:03 by jperras           #+#    #+#              #
-#    Updated: 2022/04/29 09:45:18 by jperras          ###   ########.fr        #
+#    Updated: 2022/04/29 16:37:40 by jperras          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = miniRT
 
 SRCS = minirt.c windows.c vector.c vector2.c calcul.c utils.c parse.c parse_elements.c init_data.c ft_split2.c utils_parse.c \
-			calcul2.c
+			calcul2.c cylinder.c hooks.c
 
 INCLUDES = -I./includes
 
