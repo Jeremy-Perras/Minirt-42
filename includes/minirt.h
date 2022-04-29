@@ -6,7 +6,7 @@
 /*   By: jperras <jperras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 11:03:23 by jperras           #+#    #+#             */
-/*   Updated: 2022/04/28 14:51:02 by jperras          ###   ########.fr       */
+/*   Updated: 2022/04/29 09:44:11 by jperras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ typedef struct s_vector
  double z;
 } t_vector;
 
+typedef struct s_ray
+{
+  t_vector  origin;
+  t_vector  dir;
+} t_ray;
 
 typedef struct s_size
 {
@@ -60,6 +65,7 @@ typedef struct s_pl
 	double r;
 	double g;
 	double b;
+  double d;
 	t_vector origin;
 	t_vector vector;
 }	t_pl;
@@ -172,6 +178,12 @@ t_vector ft_norm(t_vector vector);
 */
 int ft_intermin(t_vector *P, t_vector *N, t_data * data);
 double ft_intermulti(t_data *data, t_vector *P, t_vector *N, int i);
+double ft_inter(t_data *data, t_vector *P, t_vector *N,int i);
+/*
+* calcul.c
+*/
+int ft_interplan(t_data *data);
+
 /*
 * utils.c
 */

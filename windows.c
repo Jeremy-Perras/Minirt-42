@@ -6,7 +6,7 @@
 /*   By: jperras <jperras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 13:36:16 by jperras           #+#    #+#             */
-/*   Updated: 2022/04/28 16:02:06 by jperras          ###   ########.fr       */
+/*   Updated: 2022/04/29 09:56:36 by jperras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_win	ft_windows(void *mlx, int widht, int height, char *title)
 	mlx_hook(windows.ref, 17, 0, ft_close, 0);
 	return (windows);
 }
+
 void ft_put_background(t_data *data)
 {
 	int	i;
@@ -53,12 +54,14 @@ void ft_put_pixel(t_data *data)
 	int	i;
 	int	j;
 	int k;
+	// int	l;
 	t_vector P;
 	t_vector N;
 	double inte;
 	t_vector vector;
 	int color;
 	int lum;
+	// t_ray ray;
 
 
 	i = 0;
@@ -68,11 +71,13 @@ void ft_put_pixel(t_data *data)
 	{
 		while(j < Width)
 		{
+			color = create_trgb(0,0,0,0);
 			data->C->vector.x = j - Width / 2;
 			data->C->vector.y = i - Height / 2;
 			data->C->vector.z = -(Width / (2 * tan(((data->C->fov * M_PI) / 180)/2)));
+			k = ft_interplan(data);
 			data->C->vector = ft_norm(data->C->vector);
-		 	k = ft_intermin(&P, &N, data);
+			k = ft_intermin(&P, &N, data);
 			inte = 0;
 			if(k)
 			{
@@ -80,6 +85,8 @@ void ft_put_pixel(t_data *data)
 				vector.y = data->L->origin.y - P.y;
 				vector.z = data->L->origin.z - P.z;
 				vector = ft_norm(vector);
+				// ray.origin = P;
+				// ray.dir = vector;
 				inte = lum * (ft_sca(vector, N) / ft_norm2(vector));
 				if (inte > 255)
 					inte = 255;
@@ -87,8 +94,9 @@ void ft_put_pixel(t_data *data)
 					inte = 0;
 				if(inte != 0)
 					color = create_trgb(inte, data->sp->r, data->sp->g, data->sp->b);
-				mlx_pixel_put(data->mlx, data->win.ref,  j, i, color);
 			}
+			mlx_pixel_put(data->mlx, data->win.ref,  j, i, color);
+			mlx_pixel_put(data->mlx, data->win.ref,  data->L->origin.x, data->L->origin.y, 0x99FF0000);
 			j++;
 		}
 		j = 0;
