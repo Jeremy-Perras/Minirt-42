@@ -6,7 +6,7 @@
 /*   By: jperras <jperras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 11:03:23 by jperras           #+#    #+#             */
-/*   Updated: 2022/04/29 09:44:11 by jperras          ###   ########.fr       */
+/*   Updated: 2022/04/29 11:47:21 by jperras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,9 +178,8 @@ t_vector ft_norm(t_vector vector);
 */
 int ft_intermin(t_vector *P, t_vector *N, t_data * data);
 double ft_intermulti(t_data *data, t_vector *P, t_vector *N, int i);
-double ft_inter(t_data *data, t_vector *P, t_vector *N,int i);
 /*
-* calcul.c
+* calcul2.c
 */
 int ft_interplan(t_data *data);
 
@@ -189,5 +188,4 @@ int ft_interplan(t_data *data);
 */
 int	create_trgb(int t, int r, int g, int b);
 void	ft_puthexa(int b, int *m, char *c);
-
 #endif
