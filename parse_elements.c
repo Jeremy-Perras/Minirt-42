@@ -6,7 +6,7 @@
 /*   By: dhaliti <dhaliti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 13:50:32 by dhaliti           #+#    #+#             */
-/*   Updated: 2022/04/28 12:25:19 by jperras          ###   ########.fr       */
+/*   Updated: 2022/04/29 12:43:20 by dhaliti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,11 +179,11 @@ int ft_cylinder(char **elem, t_data *data)
 	vector = ft_split(elem[2], ',');
 	if (!vector[2] || vector[3])
 		exit_error("Cylinder element: insufficient vector orientation");
-	data->pl->vector.x = ft_atof(vector[0]);
-	data->pl->vector.y = ft_atof(vector[1]);
-	data->pl->vector.z = ft_atof(vector[2]);
-	if (data->pl->vector.x < 0 || data->pl->vector.x > 1.0 || data->pl->vector.y < 0
-	|| data->pl->vector.y > 1.0 || data->pl->vector.z < 0 || data->pl->vector.z > 1.0)
+	data->cy->vector.x = ft_atof(vector[0]);
+	data->cy->vector.y = ft_atof(vector[1]);
+	data->cy->vector.z = ft_atof(vector[2]);
+	if (data->cy->vector.x < 0 || data->cy->vector.x > 1.0 || data->cy->vector.y < 0
+	|| data->cy->vector.y > 1.0 || data->cy->vector.z < 0 || data->cy->vector.z > 1.0)
 		exit_error("Cylinder element: invalid vector orientation");
 	data->cy->diam = ft_atof(elem[3]);
 	data->cy->height = ft_atof(elem[4]);
